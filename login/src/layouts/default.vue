@@ -20,8 +20,8 @@ export default {
     </q-layout-header>
 
     <q-page-container>
-      <div class="container flex flex-center">
-        <ccForm>
+      <div>
+        <ccForm class="container flex flex-center">
         </ccForm>
 
       </div>

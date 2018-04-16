@@ -7,7 +7,6 @@ export default {
   data() {
     return {
       msg: "",
-      menu: ["trocar senha", "Consumo", "Leitura"],
       logado: false,
       user: {
         medidor: "",
@@ -83,7 +82,8 @@ export default {
   <div v-if = '!logado'>
     <q-card>
     <q-card-title>
-    <input class="my-input" type="text" v-model="user.medidor" placeholder="Medidor">
+      <img align=right src="statics/caesb.png">
+      <input class="my-input" type="text" v-model="user.medidor" placeholder="Medidor">
       <input class="my-input criptografa" type="password" v-model="user.senha" placeholder="******">
       <input class="my-input" type="text" v-model="user.data" disabled>
       </q-card-title>
@@ -101,7 +101,7 @@ export default {
       Nome: <b>{{user.j.usuario.nome}}</b> <br>
       <p>Medidor: {{user.j.relogio}}</p> <br>
         <div>
-        <q-list>
+        <q-list class="container flex flex-center">
         <q-collapsible icon="" label="Consumo">
           <div>
             <p>Atual: {{user.j.atual}}</p>
@@ -113,7 +113,7 @@ export default {
         <q-collapsible icon="" label="Leitura">
           <div>
             <p>Resultados: {{user.j.results}}</p>
-            <P v-for="rows in user.j.rows">Custo: {{rows.c1}} - {{rows.c2}} </P>
+            <P v-for="rows,i in user.j.rows" :key="i" >Consumo: {{rows.c1}} - {{rows.c2}} </P>
           </div>
         </q-collapsible>
         <q-collapsible icon="" label="Relatório">
@@ -125,18 +125,17 @@ export default {
         </q-collapsible>
     </q-list>
       </div>
-      <q-btn aling=right type=buttom color="negative" @click='logout' value='logout'>Logout</q-btn> <br>    
+      <q-btn align=right type=buttom color="negative" @click='logout' value='logout'>Logout</q-btn> <br>    
     </div>
 
 </div>
 </template>
 <style>
 .my-input {
-  width: 75%;
-  margin-bottom: 30px;
+  width: 50%;
+  margin-bottom: 50px;
 }
 .my-button {
-  width: 75%;
+  width: 50%;
 }
-
 </style>
