@@ -98,34 +98,36 @@ export default {
     </div>
 
     <div v-else>
+      <q-card>
+    <q-card-title>
       Nome: <b>{{user.j.usuario.nome}}</b> <br>
       <p>Medidor: {{user.j.relogio}}</p> <br>
-        <div>
+      </q-card-title>
+    <q-card-separator />
+    <q-card-main>
+      <div>
         <q-list class="container flex flex-center">
         <q-collapsible icon="" label="Consumo">
-          <div>
             <p>Atual: {{user.j.atual}}</p>
             <p>Data: {{user.j.data}}</p>
             <p>Consumo de 24 horas: {{user.j.consumo24h}}</p>  
             </p>Consumo de 30 dias: {{user.j.consumo30d}}</p>
-          </div>
         </q-collapsible>
         <q-collapsible icon="" label="Leitura">
-          <div>
             <p>Resultados: {{user.j.results}}</p>
             <P v-for="rows,i in user.j.rows" :key="i" >Consumo: {{rows.c1}} - {{rows.c2}} </P>
-          </div>
         </q-collapsible>
         <q-collapsible icon="" label="Relatório">
-          <div>
           <p>Período: {{user.j.periodo}}</p>
           <p>Início: {{user.j.inicio}}</p>
           <p>Fim: {{user.j.fim}}</p>
-          </div>
         </q-collapsible>
-    </q-list>
+      </q-list>
       </div>
-      <q-btn align=right type=buttom color="negative" @click='logout' value='logout'>Logout</q-btn> <br>    
+    </q-card-main>
+  </q-card>
+      <q-btn align=left type=buttom color="negative" @click='logout' value='logout'>Logout</q-btn> <br>    
+      </div>
     </div>
 
 </div>
