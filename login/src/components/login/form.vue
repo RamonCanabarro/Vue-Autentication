@@ -64,6 +64,7 @@ export default {
         this.logado = true;
         this.senha = sha256(this.senha);
         console.log(this.senha);
+        this.msg = "Bem Vindo!";
       } else {
         this.msg = "medidor ou senha incorreta";
       }
@@ -127,6 +128,8 @@ export default {
     </q-card-main>
   </q-card>
       <q-btn align=left type=buttom color="negative" @click='logout' value='logout'>Logout</q-btn> <br>    
+    <span v-if='msg'>
+      <q-alert color="positive">{{msg}}</q-alert></span>
       </div>
     </div>
 
