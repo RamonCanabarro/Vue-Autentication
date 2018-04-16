@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@websanova/vue-auth": "^2.21.6-beta",
+    "js-sha256": "^0.9.0",
     "moment": "^2.22.1",
+    "sha256": "^0.2.0",
     "vue-resource": "^1.5.0",
     "vuex": "^3.0.1"
   },
