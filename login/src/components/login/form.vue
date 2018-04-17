@@ -82,6 +82,19 @@ export default {
 </script>
 <template>
 <div>
+    <q-layout-header>
+      <q-toolbar
+        color="primary"
+        :glossy="$q.theme === 'mat'"
+        :inverted="$q.theme === 'ios'"
+      >
+        <q-toolbar-title>
+          <div v-if="!logado">SmartGrid</div>
+          <div v-else>{{msg}}, {{user.j.usuario.nome}}</div>
+         </q-toolbar-title>
+      </q-toolbar>
+    </q-layout-header>
+
   <div v-if = '!logado'>
     <q-card inline >
       <q-card-media>
@@ -103,11 +116,7 @@ export default {
     </div>
 
     <div v-else>
-      <span v-if='msg'><q-alert color="primary">{{msg}}</q-alert></span>
-      <q-card>
     <q-card-title>
-      <b>Dados do usuário</b> <br>
-      Nome: {{user.j.usuario.nome}} -
       Medidor: {{user.j.relogio}} <br>
       </q-card-title>
     <q-card-separator />
@@ -133,7 +142,7 @@ export default {
       </q-list>
       </div>
     </q-card-main>
-  </q-card>
+  
       <q-btn align=left type=buttom color="negative" @click='logout' value='logout'>Sair</q-btn> <br>
       </div>
     </div>
