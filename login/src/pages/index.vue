@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="$q.platform.is.ios">
-      Gets rendered only on iOS platform.
+      // Gets rendered only on iOS platform.
     </div>
   </div>
 </template>

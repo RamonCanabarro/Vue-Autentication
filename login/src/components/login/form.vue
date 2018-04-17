@@ -6,12 +6,12 @@ export default {
   name: "login",
   data() {
     return {
+      open:true,
       msg: "",
       logado: false,
       user: {
         medidor: "",
         senha: "",
-        data: moment().format("DD/MM/YYYY"),
         j: {
           relogio: "0000228",
           token: "asjdhaslkjdhaskdjhaskdjhkjhasd",
@@ -62,9 +62,11 @@ export default {
         this.user.j.relogio + this.user.j.relogio
       ) {
         this.logado = true;
-        this.senha = sha256(this.senha);
+        this.senha = sha256("this.senha");
         console.log(this.senha);
-        this.msg = "Bem Vindo!";
+        this.msg = "Bem Vindo!";  
+        this.open = true;
+        console.log(this.open)
       } else {
         this.msg = "medidor ou senha incorreta";
       }
@@ -74,19 +76,21 @@ export default {
       this.user.senha = "";
       this.logado = false;
       this.msg = "";
-    }
+    },
   }
 };
 </script>
 <template>
 <div>
   <div v-if = '!logado'>
-    <q-card>
+    <q-card inline >
+      <q-card-media>
+      <img src="statics/caesb.png">
+      </q-card-media">
+    <q-card-separator  class="my-input" /> <br>
     <q-card-title>
-      <img align=right src="statics/caesb.png">
-      <input class="my-input" type="text" v-model="user.medidor" placeholder="Medidor">
-      <input class="my-input criptografa" type="password" v-model="user.senha" placeholder="******">
-      <input class="my-input" type="text" v-model="user.data" disabled>
+      <q-input class="my-input" v-model="user.medidor" placeholder="Medidor" />
+      <q-input class="my-input" type="password" v-model="user.senha" placeholder="******" />
       </q-card-title>
     <q-card-separator />
     <q-card-main>
@@ -99,16 +103,18 @@ export default {
     </div>
 
     <div v-else>
+      <span v-if='msg'><q-alert color="primary">{{msg}}</q-alert></span>
       <q-card>
     <q-card-title>
-      Nome: <b>{{user.j.usuario.nome}}</b> <br>
-      <p>Medidor: {{user.j.relogio}}</p> <br>
+      <b>Dados do usuário</b> <br>
+      Nome: {{user.j.usuario.nome}} -
+      Medidor: {{user.j.relogio}} <br>
       </q-card-title>
     <q-card-separator />
     <q-card-main>
       <div>
         <q-list class="container flex flex-center">
-        <q-collapsible icon="" label="Consumo">
+        <q-collapsible icon="" label="Consumo" v-model="open">
             <p>Atual: {{user.j.atual}}</p>
             <p>Data: {{user.j.data}}</p>
             <p>Consumo de 24 horas: {{user.j.consumo24h}}</p>  
@@ -119,17 +125,16 @@ export default {
             <P v-for="rows,i in user.j.rows" :key="i" >Consumo: {{rows.c1}} - {{rows.c2}} </P>
         </q-collapsible>
         <q-collapsible icon="" label="Relatório">
-          <p>Período: {{user.j.periodo}}</p>
-          <p>Início: {{user.j.inicio}}</p>
-          <p>Fim: {{user.j.fim}}</p>
+          <p>Período:</p>
+          <p><q-btn type=buttom color="positive" @click='' value=''>24 Horas</q-btn></p>
+          <p><q-btn type=buttom color="warning" @click='' value=''>7 Dias</q-btn></p>
+          <p><q-btn type=buttom color="negative" @click='' value=''>30 Dias</q-btn></p>
         </q-collapsible>
       </q-list>
       </div>
     </q-card-main>
   </q-card>
-      <q-btn align=left type=buttom color="negative" @click='logout' value='logout'>Logout</q-btn> <br>    
-    <span v-if='msg'>
-      <q-alert color="positive">{{msg}}</q-alert></span>
+      <q-btn align=left type=buttom color="negative" @click='logout' value='logout'>Sair</q-btn> <br>
       </div>
     </div>
 
@@ -137,10 +142,9 @@ export default {
 </template>
 <style>
 .my-input {
-  width: 50%;
   margin-bottom: 50px;
 }
 .my-button {
-  width: 50%;
+  width: 95%;
 }
 </style>
