@@ -11,9 +11,9 @@ module.exports = function (ctx) {
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
       'material-icons'
-      // 'ionicons',
-      // 'mdi',
-      // 'fontawesome'
+      //'ionicons',
+      //'mdi',
+      //'fontawesome'
     ],
     supportIE: false,
     vendor: {
@@ -60,7 +60,8 @@ module.exports = function (ctx) {
         'QCardSeparator',
         'QCardActions',
         'QCollapsible',
-        'QInput'
+        'QInput',
+
 
       ],
       directives: [
