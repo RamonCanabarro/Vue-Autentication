@@ -1,8 +1,7 @@
 <script>
 import ccForm from '../components/login/form.vue'
-import ccList from '../components/login/list.vue'
 export default {
-  components: {ccForm, ccList},
+  components: {ccForm},
 };
 
 </script>

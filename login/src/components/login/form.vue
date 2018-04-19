@@ -7,21 +7,20 @@
         :inverted="$q.theme === 'ios'"
       >
         <q-toolbar-title>
-          <div v-if="!logado">SmartGrid</div>
-          <div v-else>{{msg}}, {{user.j.usuario.nome}}</div>
-         </q-toolbar-title>
+          <div >SmartGrid</div>
+          </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
 
-  <div v-if = '!logado'>
+  <div>
     <q-card inline >
       <q-card-media>
       <img src="statics/caesb.png">
       </q-card-media>
     <q-card-separator  class="my-input" /> <br>
     <q-card-title>
-      <q-input class="my-input" v-model="user.login" placeholder="login" />
-      <q-input class="my-input" type="password" v-model="user.password" placeholder="******" />
+      <q-input class="my-input" v-model="user.medidor" placeholder="login" />
+      <q-input class="my-input" type="password" v-model="user.senha" placeholder="******" />
       <ul v-if="user.errors && user.errors.length">
         <li v-for="error of user.errors">
           {{error.message}}
@@ -50,57 +49,55 @@
 }
 </style>
 <script>
+import vuex from "vuex";
+import vue from "vue";
 import moment from "moment";
 import sha256 from "js-sha256";
 import date from "quasar";
 import axios from 'axios';
-import Countdown from "vuejs-countdown";
-
 
 export default {
   name: "login",
-  components:{ Countdown },
   data() {
     return {
       open:true,
       msg: "",
-      logado: false,
       user: {
-        login: "",
-        password: "",
-        errors:[],
+        medidor: "",
+        senha: "",
+        errors:[]
       }
     };
   },
-
   methods: {
     login() {
-    axios.post("", {
-    body: {
-            login: "",
-            password: "",
-            dispositivo: "",
-            ip: "",
-            idDispositivo: "",
-            env: ""
-          }
+      axios.post("", {
+            login: this.user.medidor,
+            password: sha256(this.user.senha),
+            dispositivo: "0073",
+            ip: "192.168.0.15",
+            idDispositivo: "XZXDSDSDSDAA",
+            env: "p"
           })
           .then(response => {
-              console.log(response)
-          })
+            console.log(response)
+            const token = response.data.token
+            localStorage.setItem('user-token', token) 
+            this.$router.push('index')
+            })
           .catch(error => {
                this.$q.notify({
                 color: 'negative',
                 position: 'top',
-                message: 'Loading failed',
+                message: "Campos inválidos",
                 icon: 'report_problem'
               })
+             localStorage.removeItem('user-token')
           })
         },
     logout() {
       this.user.login = "";
       this.user.password = "";
-      this.logado = false;
       this.msg = "";
     },
   }
