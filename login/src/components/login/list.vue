@@ -88,11 +88,18 @@ export default {
       	array:[]
 
     };
-  },
+	},
+	created(){
+		this.getConsumo()
+		this.getUsuario()
+		this.get30d()
+		this.get24h()
+		this.getLeitura()
+	},
   methods: {
- 
+		
    getConsumo() {
-	       axios.get("" , config)
+	       axios.get("link" , config)
 	          .then(response => {
 	            this.consumos = response.data[0]
 	            conosle.log(this.consumos)
@@ -109,7 +116,7 @@ export default {
 	        },
 			getUsuario() {
 			    	console.log("Cheguei")
-			       axios.get("" , config)
+			       axios.get("link" , config)
 			          .then(response => {
 			            this.usuario = response.data.usuario
 			            })
@@ -124,7 +131,7 @@ export default {
 			          })
 			        },
 	        getLeitura() {
-	       axios.get("" , config)
+	       axios.get("link" , config)
 	          .then(response => {
 	            this.leitura = response.data
 	            for (var i = 0; i <= 20; i++) {
@@ -143,7 +150,7 @@ export default {
 	          })
 	        },
 	        get30d() {
-	       axios.get("" , config)
+	       axios.get("link" , config)
 	          .then(response => {
 	            this.leitura = response.data[0]
 	            console.log(this.leitura)
@@ -159,7 +166,7 @@ export default {
 	          })
 	        },
 	        get24h() {
-	       axios.get("" , config)
+	       axios.get("link" , config)
 	          .then(response => {
 	            this.leitura = response.data[0]
 
@@ -176,7 +183,7 @@ export default {
 	          })
 	        },
 	        get7d() {
-	       axios.get("" , config)
+	       axios.get("link" , config)
 	          .then(response => {
 	            this.leitura = response.data[0]
 	            console.log(this.leitura)

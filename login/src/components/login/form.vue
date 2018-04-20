@@ -13,11 +13,9 @@
     </q-layout-header>
 
   <div>
-    <q-card inline >
-      <q-card-media>
+    <q-card padding >
       <img src="statics/caesb.png">
-      </q-card-media>
-    <q-card-separator  class="my-input" /> <br>
+      <q-card-separator  class="my-input" /> <br>
     <q-card-title>
       <q-input class="my-input" v-model="user.medidor" placeholder="login" />
       <q-input class="my-input" type="password" v-model="user.senha" placeholder="******" />
@@ -47,6 +45,9 @@
 .my-button {
   width: 95%;
 }
+.padding{
+  margin: 50px;
+}
 </style>
 <script>
 import vuex from "vuex";
@@ -71,7 +72,7 @@ export default {
   },
   methods: {
     login() {
-      axios.post("", {
+      axios.post("link", {
             login: this.user.medidor,
             password: sha256(this.user.senha),
             dispositivo: "0073",
@@ -89,17 +90,12 @@ export default {
                this.$q.notify({
                 color: 'negative',
                 position: 'top',
-                message: "Campos inválidos",
+                message: "Conexão Recusada",
                 icon: 'report_problem'
               })
              localStorage.removeItem('user-token')
           })
         },
-    logout() {
-      this.user.login = "";
-      this.user.password = "";
-      this.msg = "";
-    },
   }
 };
 </script>
